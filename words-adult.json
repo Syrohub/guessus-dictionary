@@ -1313,6 +1313,7 @@
       "Chat",
       "Email",
       "File",
+      "Folder",
       "Folder"
     ],
     "dirty": [
@@ -1577,6 +1578,10 @@
       "Girth",
       "Length",
       "Curvature",
+      "Hairiness",
+      "Thickness",
+      "Length",
+      "Curvature",
       "Hairiness"
     ],
     "extreme": [
@@ -1718,6 +1723,7 @@
       "Bedbugs",
       "Cockroaches",
       "Rats",
+      "Maggots",
       "Maggots"
     ]
   },
@@ -2160,6 +2166,18 @@
       "Chat",
       "Email",
       "Archivo",
+      "Carpeta",
+      "Batería",
+      "Acumulador",
+      "WiFi",
+      "Bluetooth",
+      "Internet",
+      "Sitio web",
+      "App",
+      "Juego",
+      "Chat",
+      "Correo",
+      "Archivo",
       "Carpeta"
     ],
     "dirty": [
@@ -2419,7 +2437,16 @@
       "Grosor",
       "Largo",
       "Curva",
-      "Pelos"
+      "Pelos",
+      "Sarna",
+      "Hongos",
+      "Olor",
+      "Sabor",
+      "Tamaño",
+      "Grosor",
+      "Longitud",
+      "Curvatura",
+      "Vellosidad"
     ],
     "extreme": [
       "BDSM",
@@ -2560,7 +2587,8 @@
       "Chinches",
       "Cucarachas",
       "Ratas",
-      "Larvas"
+      "Larvas",
+      "Gusanos"
     ]
   },
   "ua": {
@@ -3013,6 +3041,7 @@
       "Чат",
       "Пошта",
       "Файл",
+      "Папка",
       "Папка"
     ],
     "dirty": [
@@ -3280,6 +3309,7 @@
       "Товщина",
       "Довжина",
       "Кривизна",
+      "Волохатість",
       "Волохатість"
     ],
     "extreme": [

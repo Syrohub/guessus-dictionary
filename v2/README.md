@@ -9,7 +9,7 @@ To publish: edit `<variant>.json`, bump `"version"` in it and in `<variant>-vers
 
 ## Compatibility for 2.4.0 content updates
 
-This channel stays usable by the existing v2 app without an app release. Family has 17 topics. Adult has the same 17, Party and the existing `dirty` topic (19 total). The six reviewed Uncensored lists are combined under that original ID, preserving a saved `dirty` opt-out; do not publish the split IDs to this feed.
+This channel stays usable by the existing v2 app without an app release. Family has 18 topics. Adult has the same 18, Party and the existing `dirty` topic (20 total). The six reviewed Uncensored lists are combined under that original ID, preserving a saved `dirty` opt-out; do not publish the split IDs to this feed.
 
 Both variants include the independently curated EN/RU/ES/UA content and all nine added Premium topics since 2.0.0 (Singers & actors plus eight culture topics). Keep root-level legacy files unchanged. Publish dictionary payloads first, verify their public URLs, then update version manifests.
 

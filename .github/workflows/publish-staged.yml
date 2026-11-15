@@ -1,0 +1,47 @@
+name: Publish staged dictionary
+
+on:
+  schedule:
+    # 10 December, 16:00 UTC: New Year's add-on for the holidays topic (staged/2.6.0)
+    - cron: '0 16 10 12 *'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Staged version to publish (folder name under staged/)
+        required: true
+        default: '2.6.0'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish data files, then version files
+        run: |
+          set -euo pipefail
+          VERSION="${{ github.event.inputs.version || '2.6.0' }}"
+          DIR="staged/$VERSION"
+          if [ ! -d "$DIR" ]; then echo "Nothing staged for $VERSION"; exit 0; fi
+          ver() { python3 -c "import json,sys; print(json.load(open(sys.argv[1]))['version'])" "$1"; }
+          newer() { python3 -c "import sys; a,b=[tuple(map(int,v.split('.'))) for v in sys.argv[1:3]]; sys.exit(0 if a>b else 1)" "$1" "$2"; }
+          for channel in v2 v3; do for variant in family adult; do
+            [ "$(ver "$DIR/$channel/$variant.json")" = "$VERSION" ] || { echo "$DIR/$channel/$variant.json is not $VERSION"; exit 1; }
+            [ "$(ver "$DIR/$channel/$variant-version.json")" = "$VERSION" ] || { echo "$DIR/$channel/$variant-version.json is not $VERSION"; exit 1; }
+          done; done
+          LIVE="$(ver v3/family-version.json)"
+          if ! newer "$VERSION" "$LIVE"; then echo "Live version $LIVE is not older than $VERSION: nothing to do"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for channel in v2 v3; do cp "$DIR/$channel/family.json" "$DIR/$channel/adult.json" "$channel/"; done
+          git add v2/family.json v2/adult.json v3/family.json v3/adult.json
+          git commit -m "Dictionaries $VERSION: data (v2 + v3), scheduled publish"
+          git push
+          # The public file cache lasts five minutes; announce the version only after it has expired.
+          sleep 360
+          for channel in v2 v3; do cp "$DIR/$channel/family-version.json" "$DIR/$channel/adult-version.json" "$channel/"; done
+          git add v2/family-version.json v2/adult-version.json v3/family-version.json v3/adult-version.json
+          git commit -m "Dictionaries $VERSION: version files, scheduled publish"
+          git push

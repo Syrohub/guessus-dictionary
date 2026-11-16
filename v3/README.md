@@ -1,6 +1,6 @@
 # GuessUs dictionaries (v3)
 
-For app clients whose updater reads `main/v3` and migrates the saved `dirty` opt-out into six Uncensored IDs. The current content release is 2.5.1, with independent EN/RU/ES/UA selections.
+For app clients whose updater reads `main/v3` and migrates the saved `dirty` opt-out into six Uncensored IDs. The current content release is 2.5.2, with independent EN/RU/ES/UA selections.
 
 - Family: 18 visible categories, 5,624 localized card rows.
 - Adult: 25 visible categories, 8,690 localized card rows. The hidden empty `dirty` marker is required for merging older dictionaries.
